@@ -2,10 +2,10 @@
 #include <stdint.h>
 #include <string.h>
 
-const size_t bufsz = (1 << 20);
+#define BUFSZ ((size_t) (1 << 20))
 
 struct buffer {
-  char data[bufsz];
+  char data[BUFSZ];
   size_t sz, st, ed;
   char prev, cur;
   FILE *output;
@@ -27,7 +27,7 @@ void buf_init(struct buffer *buf, FILE *output) {
 }
 
 void buf_fill(struct buffer *buf) {
-  buf->sz = fread(buf->data, 1, bufsz, stdin); 
+  buf->sz = fread(buf->data, 1, BUFSZ, stdin); 
   buf->st = 0;
   buf->ed = 0;
 }
